@@ -1,8 +1,5 @@
 const { MongoClient } = require("mongodb");
 const uri = require("./atlas_uri");
-
-console.log(uri);
-
 const client = new MongoClient(uri);
 const dbname = "bank";
 
