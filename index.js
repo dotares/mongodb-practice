@@ -49,7 +49,7 @@ const run = async () => {
         let result = await accountsCollection.find(documentsToFind);
         let docCount = accountsCollection.countDocuments(documentsToFind);
         console.log(`There's ${await docCount} documents`);
-        await result.forEach((doc) => console.log(doc));
+        for await (let doc of result) console.log(doc);
     } catch (err) {
         console.error(`Error: ${err}`);
     } finally {
