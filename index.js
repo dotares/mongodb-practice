@@ -15,7 +15,9 @@ const dbName = "stationary";
 const collectionName = "inventory";
 const accountsCollection = client.db(dbName).collection(collectionName);
 
-const documentToDelete = { _id: new ObjectId("648eab169708be45ab7fc8e6") };
+const documentToDelete = {
+    qty: { $lte: 25 },
+};
 
 const connectToDb = async () => {
     try {
