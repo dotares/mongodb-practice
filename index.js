@@ -15,12 +15,22 @@ const dbName = "stationary";
 const collectionName = "inventory";
 const accountsCollection = client.db(dbName).collection(collectionName);
 
-const sampleStationary = {
-    item: "pencil",
-    qty: 10,
-    tags: ["red", "black", "thin"],
-    dim_cm: [2, 6],
-};
+// const sampleStationary = [
+//     {
+//         item: "pencil",
+//         qty: 10,
+//         tags: ["red", "black", "thin"],
+//         dim_cm: [2, 6],
+//     },
+//     {
+//         item: "pen",
+//         qty: 50,
+//         tags: ["green", "white", "fountain"],
+//         dim_cm: [5, 10],
+//     },
+// ];
+
+const documentsToFind = { qty: { $gt: 45 } };
 
 const connectToDb = async () => {
     try {
@@ -36,8 +46,10 @@ connectToDb().catch(console.dir);
 const run = async () => {
     try {
         await connectToDb();
-        result = await accountsCollection.insertOne(sampleStationary);
-        console.log(result.insertedId);
+        let result = await accountsCollection.find(documentsToFind);
+        let docCount = accountsCollection.countDocuments(documentsToFind);
+        console.log(`There's ${await docCount} documents`);
+        await result.forEach((doc) => console.log(doc));
     } catch (err) {
         console.error(`Error: ${err}`);
     } finally {
