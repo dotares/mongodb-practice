@@ -15,8 +15,8 @@ const dbName = "stationary";
 const collectionName = "inventory";
 const accountsCollection = client.db(dbName).collection(collectionName);
 
-const documentToUpdate = { _id: new ObjectId("648eab169708be45ab7fc8e3") };
-const update = { $inc: { qty: 20 } };
+const documentToUpdate = { item: "pencil" };
+const update = { $set: { sharp: true } };
 
 const connectToDb = async () => {
     try {
@@ -30,12 +30,12 @@ const connectToDb = async () => {
 const run = async () => {
     try {
         await connectToDb().catch(console.dir);
-        let result = await accountsCollection.updateOne(
+        let result = await accountsCollection.updateMany(
             documentToUpdate,
             update
         );
-        result.modifiedCount === 1
-            ? console.log(`1 Document updated`)
+        result.modifiedCount > 0
+            ? console.log(`${result.modifiedCount} documents updated`)
             : console.log(`No documents updated`);
     } catch (err) {
         console.error(`Error: ${err}`);
