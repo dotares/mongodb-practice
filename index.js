@@ -25,12 +25,9 @@ const sampleStationary = {
 const connectToDb = async () => {
     try {
         await client.connect();
-        await client.db(dbName).command({ ping: 1 });
-        console.log(
-            `Pinged your deployment (${dbName}). You are now connected`
-        );
-    } finally {
-        await client.close();
+        console.log(`You're connected to your database ${dbName}`);
+    } catch (err) {
+        console.error(`Error: ${err}`);
     }
 };
 
@@ -41,6 +38,8 @@ const run = async () => {
         await connectToDb();
         result = await accountsCollection.insertOne(sampleStationary);
         console.log(result.insertedId);
+    } catch (err) {
+        console.error(`Error: ${err}`);
     } finally {
         await client.close();
     }
