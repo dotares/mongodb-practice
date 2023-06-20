@@ -3,6 +3,10 @@ const uri = require("./atlas_uri");
 const client = new MongoClient(uri);
 const dbname = "bank";
 
+const account = {
+    _id: new ObjectId(crypto.randomUUID()),
+};
+
 const connectToDatabase = async () => {
     try {
         await client.connect();
