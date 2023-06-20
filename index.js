@@ -34,4 +34,14 @@ async function connectToDb() {
     }
 }
 
-connectToDb().catch(console.dir);
+const main = async () => {
+    try {
+        await connectToDb().catch(console.dir);
+        result = await accountsCollection.insertOne(sampleStationary);
+        console.log(result.insertedId);
+    } finally {
+        await client.close();
+    }
+};
+
+main();
