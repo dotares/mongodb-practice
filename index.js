@@ -15,8 +15,7 @@ const dbName = "stationary";
 const collectionName = "inventory";
 const accountsCollection = client.db(dbName).collection(collectionName);
 
-const documentToUpdate = { item: "pencil" };
-const update = { $set: { sharp: true } };
+const documentToDelete = { _id: new ObjectId("648eab169708be45ab7fc8e6") };
 
 const connectToDb = async () => {
     try {
@@ -30,13 +29,10 @@ const connectToDb = async () => {
 const run = async () => {
     try {
         await connectToDb().catch(console.dir);
-        let result = await accountsCollection.updateMany(
-            documentToUpdate,
-            update
-        );
-        result.modifiedCount > 0
-            ? console.log(`${result.modifiedCount} documents updated`)
-            : console.log(`No documents updated`);
+        let result = await accountsCollection.deleteOne(documentToDelete);
+        result.deletedCount > 1
+            ? console.log(`Deleted one document`)
+            : console.log(`No documents deleted`);
     } catch (err) {
         console.error(`Error: ${err}`);
     } finally {
