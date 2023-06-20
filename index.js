@@ -22,18 +22,16 @@ const sampleStationary = {
     dim_cm: [2, 6],
 };
 
-async function run() {
+async function connectToDb() {
     try {
         await client.connect();
-        let result = await accountsCollection.insertOne(sampleStationary);
         await client.db(dbName).command({ ping: 1 });
         console.log(
             `Pinged your deployment (${dbName}). You are now connected`
         );
-        console.log(result.insertedId);
     } finally {
         await client.close();
     }
 }
 
-run().catch(console.dir);
+connectToDb().catch(console.dir);
