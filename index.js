@@ -31,9 +31,9 @@ const connectToDb = async () => {
 const run = async () => {
     try {
         await connectToDb().catch(console.dir);
-        let result = await accountsCollection.deleteOne(documentToDelete);
-        result.deletedCount > 1
-            ? console.log(`Deleted one document`)
+        let result = await accountsCollection.deleteMany(documentToDelete);
+        result.deletedCount > 0
+            ? console.log(`Deleted ${result.deletedCount} documents`)
             : console.log(`No documents deleted`);
     } catch (err) {
         console.error(`Error: ${err}`);
