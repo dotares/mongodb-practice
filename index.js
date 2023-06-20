@@ -15,20 +15,20 @@ const dbName = "stationary";
 const collectionName = "inventory";
 const accountsCollection = client.db(dbName).collection(collectionName);
 
-// const sampleStationary = [
-//     {
-//         item: "pencil",
-//         qty: 10,
-//         tags: ["red", "black", "thin"],
-//         dim_cm: [2, 6],
-//     },
-//     {
-//         item: "pen",
-//         qty: 50,
-//         tags: ["green", "white", "fountain"],
-//         dim_cm: [5, 10],
-//     },
-// ];
+const sampleStationary = [
+    {
+        item: "pencil",
+        qty: 10,
+        tags: ["red", "black", "thin"],
+        dim_cm: [2, 6],
+    },
+    {
+        item: "pen",
+        qty: 50,
+        tags: ["green", "white", "fountain"],
+        dim_cm: [5, 10],
+    },
+];
 
 const documentsToFind = { qty: { $gt: 45 } };
 
