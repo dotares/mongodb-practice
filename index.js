@@ -30,7 +30,8 @@ const sampleStationary = [
     },
 ];
 
-const documentsToFind = { qty: { $gt: 45 } };
+const documentToUpdate = { _id: ObjectId("648eab169708be45ab7fc8e3") };
+const update = { qty: { $inc: -20 } };
 
 const connectToDb = async () => {
     try {
@@ -46,9 +47,12 @@ connectToDb().catch(console.dir);
 const run = async () => {
     try {
         await connectToDb();
-        let result = await accountsCollection.find(documentsToFind);
-        let docCount = accountsCollection.countDocuments(documentsToFind);
-        console.log(`There's ${await docCount} documents`);
+        let result = await accountsCollection.updateOne(
+            documentToUpdate,
+            update
+        );
+        // let docCount = accountsCollection.countDocuments(documentsToFind);
+        // console.log(`There's ${await docCount} documents`);
         for await (let doc of result) console.log(doc);
     } catch (err) {
         console.error(`Error: ${err}`);
