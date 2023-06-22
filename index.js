@@ -10,13 +10,9 @@ const client = new MongoClient(uri, {
     },
 });
 
-const dbName = "";
-const collectionName = "inventory";
+const dbName = "sample_analytics";
+const collectionName = "accounts";
 const accountsCollection = client.db(dbName).collection(collectionName);
-
-const documentToDelete = {
-    qty: { $lte: 25 },
-};
 
 const connectToDb = async () => {
     try {
@@ -30,10 +26,6 @@ const connectToDb = async () => {
 const run = async () => {
     try {
         await connectToDb().catch(console.dir);
-        let result = await accountsCollection.deleteMany(documentToDelete);
-        result.deletedCount > 0
-            ? console.log(`Deleted ${result.deletedCount} documents`)
-            : console.log(`No documents deleted`);
     } catch (err) {
         console.error(`Error: ${err}`);
     } finally {
