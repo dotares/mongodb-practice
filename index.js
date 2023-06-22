@@ -1,7 +1,6 @@
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
-const uri =
-    "mongodb+srv://admin:adminpassword@testcluster.9hkrkub.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.atlasURI;
 
 const client = new MongoClient(uri, {
     serverApi: {
@@ -11,7 +10,7 @@ const client = new MongoClient(uri, {
     },
 });
 
-const dbName = "stationary";
+const dbName = "";
 const collectionName = "inventory";
 const accountsCollection = client.db(dbName).collection(collectionName);
 
