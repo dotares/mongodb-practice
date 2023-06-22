@@ -1,5 +1,5 @@
-require("dotenv").config();
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+require("dotenv").config();
 
 const uri = process.env.ATLAS_URI;
 
@@ -24,14 +24,16 @@ const connectToDb = async () => {
     }
 };
 
-const run = async () => {
-    try {
-        await connectToDb().catch(console.dir);
-    } catch (err) {
-        console.error(`Error: ${err}`);
-    } finally {
-        await client.close();
-    }
-};
+connectToDb().catch(console.dir);
 
-run();
+// const run = async () => {
+//     try {
+//         await connectToDb().catch(console.dir);
+//     } catch (err) {
+//         console.error(`Error: ${err}`);
+//     } finally {
+//         await client.close();
+//     }
+// };
+
+// run();
