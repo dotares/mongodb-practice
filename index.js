@@ -1,8 +1,7 @@
-require("dotenv").config();
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+require("dotenv").config();
 
 const uri = process.env.ATLAS_URI;
-console.log(uri);
 
 const client = new MongoClient(uri, {
     serverApi: {
