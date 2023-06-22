@@ -11,8 +11,8 @@ const client = new MongoClient(uri, {
     },
 });
 
-const dbName = "sample_analytics";
-const collectionName = "accounts";
+const dbName = "school";
+const collectionName = "class";
 const accountsCollection = client.db(dbName).collection(collectionName);
 
 const connectToDb = async () => {
@@ -24,16 +24,16 @@ const connectToDb = async () => {
     }
 };
 
-connectToDb().catch(console.dir);
+const run = async () => {
+    try {
+        await connectToDb().catch(console.dir);
+        let result = accountsCollection.findOne();
+        console.log(result);
+    } catch (err) {
+        console.error(`Error: ${err}`);
+    } finally {
+        await client.close();
+    }
+};
 
-// const run = async () => {
-//     try {
-//         await connectToDb().catch(console.dir);
-//     } catch (err) {
-//         console.error(`Error: ${err}`);
-//     } finally {
-//         await client.close();
-//     }
-// };
-
-// run();
+run();
