@@ -27,7 +27,7 @@ const connectToDb = async () => {
 const run = async () => {
     try {
         await connectToDb().catch(console.dir);
-        let result = await accountsCollection.find({ section: "A" }).toArray();
+        let result = await accountsCollection.find().toArray();
         console.log(result);
     } catch (err) {
         console.error(`Error: ${err}`);
