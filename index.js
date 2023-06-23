@@ -28,9 +28,12 @@ const pipeline = [
     {
         // Group the documents according to the rank and calculate the values
         $group: {
-            _id: "$country",
+            _id: "$area",
             averagePopulation: { $avg: { $round: "$pop2023" } },
         },
+    },
+    {
+        $sort: { _id: 1 },
     },
 ];
 
