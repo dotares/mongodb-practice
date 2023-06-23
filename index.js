@@ -18,7 +18,26 @@ const connectToDb = async () => {
     }
 };
 
-const pipeline = [];
+const pipeline = [
+    {
+        // Match countries with less than a million population
+        $match: {
+            pop2023: { $lt: 1000000 },
+        },
+    },
+    {
+        // Group the documents according to the rank and calculate the values
+        $group: {
+            _id: "$rank",
+            averagePopulation: { $avg: "$pop2023" },
+        },
+    },
+    {
+        $project: {
+            totalPopulationAccordingToArea: { $divide: ["$area", "$pop2023"] },
+        },
+    },
+];
 
 const run = async () => {
     try {
