@@ -5,8 +5,8 @@ const uri = process.env.ATLAS_URI;
 
 const client = new MongoClient(uri);
 
-const dbName = "";
-const collectionName = "";
+const dbName = "world_population";
+const collectionName = "population";
 const accountsCollection = client.db(dbName).collection(collectionName);
 
 const connectToDb = async () => {
