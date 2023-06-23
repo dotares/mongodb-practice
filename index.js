@@ -11,8 +11,8 @@ const client = new MongoClient(uri, {
     },
 });
 
-const dbName = "school";
-const collectionName = "class";
+const dbName = "";
+const collectionName = "";
 const accountsCollection = client.db(dbName).collection(collectionName);
 
 const connectToDb = async () => {
@@ -24,28 +24,7 @@ const connectToDb = async () => {
     }
 };
 
-const pipeline = [
-    // Stage 1: match the accounts with a balance greater than $1,000
-    {
-        $match: {
-            balance: {
-                $lt: 1000,
-            },
-        },
-    },
-    // Stage 2: calculate average balance and total balance
-    {
-        $group: {
-            _id: "$account_type",
-            total_balance: {
-                $sum: "$balance",
-            },
-            avg_balance: {
-                $avg: "$balance",
-            },
-        },
-    },
-];
+const pipeline = [];
 
 const run = async () => {
     try {
