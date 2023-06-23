@@ -7,7 +7,7 @@ const client = new MongoClient(uri);
 
 const dbName = "world_population";
 const collectionName = "population";
-const accountsCollection = client.db(dbName).collection(collectionName);
+const databaseCollection = client.db(dbName).collection(collectionName);
 
 const connectToDb = async () => {
     try {
@@ -23,7 +23,7 @@ const pipeline = [];
 const run = async () => {
     try {
         await connectToDb().catch(console.dir);
-        let result = await accountsCollection.aggregate(pipeline);
+        let result = await databaseCollection.aggregate(pipeline);
         for await (const doc of result) {
             console.log(doc);
         }
