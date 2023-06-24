@@ -5,8 +5,8 @@ const uri = process.env.ATLAS_URI;
 
 const client = new MongoClient(uri);
 
-const dbName = "world_population";
-const collectionName = "pop";
+const dbName = "sample_analytics";
+const collectionName = "customers";
 const databaseCollection = client.db(dbName).collection(collectionName);
 
 const connectToDb = async () => {
@@ -18,24 +18,24 @@ const connectToDb = async () => {
     }
 };
 
-const pipeline = [
-    {
-        // Match countries with less than a million population
-        $match: {
-            pop2023: { $lt: 1000000 },
-        },
-    },
-    {
-        // Group the documents according to the rank and calculate the values
-        $group: {
-            _id: "$area",
-            averagePopulation: { $avg: { $round: "$pop2023" } },
-        },
-    },
-    {
-        $sort: { _id: 1 },
-    },
-];
+// const pipeline = [
+//     {
+//         // Match countries with less than a million population
+//         $match: {
+//             pop2023: { $lt: 1000000 },
+//         },
+//     },
+//     {
+//         // Group the documents according to the rank and calculate the values
+//         $group: {
+//             _id: "$area",
+//             averagePopulation: { $avg: { $round: "$pop2023" } },
+//         },
+//     },
+//     {
+//         $sort: { _id: 1 },
+//     },
+// ];
 
 const run = async () => {
     try {
